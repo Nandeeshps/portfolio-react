@@ -3,137 +3,165 @@
 // import { FaMapMarkerAlt } from 'react-icons/fa';
 
 // const EducationContainer = styled.section`
-//   padding: 50px 20px;
-//   background: #1a1a1a;
-//   color: #fff;
+//   padding: 60px 20px;
+//   background-color: #1e1e2f;
+//   color: #ffffff;
 //   text-align: center;
 // `;
 
 // const EducationTitle = styled.h2`
 //   font-size: 2.5rem;
-//   margin-bottom: 20px;
+//   margin-bottom: 30px;
+//   color: #f4a261;
 // `;
 
-// const Disclaimer = styled.p`
-//   font-size: 1rem;
-//   margin-bottom: 20px;
-//   color: #f39c12;
-// `;
-
-// const MapContainer = styled.div`
+// const TimelineContainer = styled.div`
 //   position: relative;
-//   width: 100%;
-//   max-width: 800px;
-//   margin: 0 auto;
-//   background: url('/path-to-your-map-background.jpg') no-repeat center center/cover;
-//   height: 500px;
-//   border-radius: 10px;
-//   overflow: hidden;
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
+//   margin: 40px auto;
+//   width: 90%;
+//   max-width: 700px;
 // `;
 
-// const Location = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   cursor: pointer;
-// `;
-
-// const LocationIcon = styled(FaMapMarkerAlt)`
-//   font-size: 2rem;
-//   color: #f39c12;
-// `;
-
-// const LocationName = styled.span`
-//   margin-top: 5px;
-//   font-size: 1rem;
-//   color: #fff;
-// `;
-
-// const slideInFromRight = keyframes`
-//   0% {
-//     transform: translateX(100%);
-//   }
-//   100% {
-//     transform: translateX(0);
-//   }
-// `;
-
-// const LocationDetails = styled.div`
+// const TimelineLine = styled.div`
 //   position: absolute;
-//   top: 50%;
+//   top: 0;
 //   left: 50%;
-//   transform: translate(-50%, -50%);
-//   background: #333;
-//   padding: 20px;
-//   border-radius: 10px;
-//   max-width: 400px;
-//   text-align: center;
-//   animation: ${slideInFromRight} 0.5s ease-out;
-//   z-index: 10;
+//   width: 2px;
+//   height: 100%;
+//   background-color: #f4a261;
+//   transform: translateX(-50%);
 // `;
 
-// const CloseButton = styled.button`
-//   background: #f39c12;
-//   border: none;
-//   border-radius: 5px;
-//   color: #fff;
-//   padding: 5px 10px;
-//   cursor: pointer;
+// const fadeIn = keyframes`
+//   from { opacity: 0; transform: translateY(20px); }
+//   to { opacity: 1; transform: translateY(0); }
+// `;
+
+// const TimelineItem = styled.div`
+//   position: relative;
+//   width: 50%;
+//   padding: 20px;
+//   box-sizing: border-box;
+//   text-align: left;
+//   margin-bottom: 40px;
+//   animation: ${fadeIn} 0.5s ease-in-out;
+
+//   &:nth-child(odd) {
+//     left: 0;
+//     text-align: right;
+//     padding-right: 30px;
+//   }
+
+//   &:nth-child(even) {
+//     left: 50%;
+//     padding-left: 30px;
+//   }
+// `;
+
+// const ItemContent = styled.div`
+//   background-color: #2d2d44;
+//   padding: 20px;
+//   border-radius: 8px;
+//   color: #e9c46a;
+//   position: relative;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+//   &:before {
+//     content: '';
+//     position: absolute;
+//     top: 50%;
+//     width: 10px;
+//     height: 10px;
+//     background-color: #f4a261;
+//     border-radius: 50%;
+//     transform: translateY(-50%);
+//   }
+
+//   &:nth-child(odd):before {
+//     right: -20px;
+//   }
+
+//   &:nth-child(even):before {
+//     left: -20px;
+//   }
+// `;
+
+// const ItemTitle = styled.h3`
+//   font-size: 1.2rem;
+//   color: #ffffff;
+// `;
+
+// const ItemDetails = styled.p`
 //   margin-top: 10px;
+//   font-size: 0.9rem;
+//   color: #c7c7c7;
+// `;
+
+// const ItemButton = styled.button`
+//   background-color: #e76f51;
+//   color: #ffffff;
+//   padding: 8px 12px;
+//   margin-top: 10px;
+//   border: none;
+//   border-radius: 4px;
+//   cursor: pointer;
+//   transition: background-color 0.3s;
+
 //   &:hover {
-//     background: #e67e22;
+//     background-color: #f4a261;
 //   }
 // `;
 
 // const locations = [
 //   {
-//     type: 'High School',
-//     name: 'PSSEMR SCHOOL',
-//     details: 'Davanagere\nCBSE\n2015-2018\nHigh School',
+//     title: 'High School',
+//     institution: 'PSSEMR SCHOOL',
+//     details: 'Davanagere, CBSE, 2015-2018',
+//     description: 'Completed my high school education with a focus on science and math subjects.',
 //   },
 //   {
-//     type: 'PUC',
-//     name: 'The Vision PU College',
-//     details: 'Bengaluru\nKSEEB\n2018-2020\nPUC',
+//     title: 'PUC',
+//     institution: 'The Vision PU College',
+//     details: 'Bengaluru, KSEEB, 2018-2020',
+//     description: 'Studied Physics, Chemistry, and Math in PUC, building a strong foundation for engineering studies.',
 //   },
 //   {
-//     type: 'UG Degree',
-//     name: 'Reva University',
-//     details: 'Bengaluru\nB.Tech\n2020-2024\nCSE',
+//     title: 'Undergraduate Degree',
+//     institution: 'Reva University',
+//     details: 'Bengaluru, B.Tech in CSE, 2020-2024',
+//     description: 'Pursuing a degree in Computer Science Engineering with a focus on software development and AI.',
 //   },
 // ];
 
 // const Education = () => {
-//   const [selectedLocation, setSelectedLocation] = useState(null);
+//   const [selectedItem, setSelectedItem] = useState(null);
+
+//   const handleItemClick = (index) => {
+//     setSelectedItem(selectedItem === index ? null : index);
+//   };
 
 //   return (
 //     <EducationContainer id="education">
-//       <EducationTitle>Education Journey</EducationTitle>
-//       <Disclaimer>Click on any icon to know more</Disclaimer>
-//       <MapContainer>
+//       <EducationTitle>Education Timeline</EducationTitle>
+//       <TimelineContainer>
+//         <TimelineLine />
 //         {locations.map((location, index) => (
-//           <Location
-//             key={index}
-//             onClick={() => setSelectedLocation(location)}
-//           >
-//             <LocationIcon />
-//             <LocationName>{location.type}</LocationName>
-//           </Location>
+//           <TimelineItem key={index}>
+//             <ItemContent>
+//               <ItemTitle>{location.title}</ItemTitle>
+//               <p><strong>{location.institution}</strong></p>
+//               <ItemDetails>{location.details}</ItemDetails>
+//               {selectedItem === index ? (
+//                 <ItemDetails>{location.description}</ItemDetails>
+//               ) : (
+//                 <ItemButton onClick={() => handleItemClick(index)}>
+//                   {selectedItem === index ? 'Hide Details' : 'View Details'}
+//                 </ItemButton>
+//               )}
+//             </ItemContent>
+//           </TimelineItem>
 //         ))}
-//         {selectedLocation && (
-//           <LocationDetails>
-//             <strong>{selectedLocation.name}</strong>
-//             <br />
-//             {selectedLocation.details.split('\n').map((line, index) => (
-//               <span key={index}>{line}<br /></span>
-//             ))}
-//             <CloseButton onClick={() => setSelectedLocation(null)}>Close</CloseButton>
-//           </LocationDetails>
-//         )}
-//       </MapContainer>
+//       </TimelineContainer>
 //     </EducationContainer>
 //   );
 // };
@@ -147,150 +175,171 @@
 
 
 
+
+
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { FaMapMarkerAlt } from 'react-icons/fa';
+import styled, { keyframes } from 'styled-components';
 
 const EducationContainer = styled.section`
-  padding: 50px 20px;
-  background: #1a1a1a;
-  color: #fff;
+  padding: 60px 20px;
+  background-color: #1a1a1a;
+  color: #ffffff;
   text-align: center;
 `;
 
 const EducationTitle = styled.h2`
   font-size: 2.5rem;
-  margin-bottom: 20px;
-`;
-
-const Disclaimer = styled.p`
-  font-size: 1rem;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: #f39c12;
 `;
 
-const MapContainer = styled.div`
+const TimelineContainer = styled.div`
   position: relative;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  height: 500px;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 700px;
 `;
 
-const TriangleContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Location = styled.div`
+const TimelineLine = styled.div`
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-`;
-
-const LocationIcon = styled(FaMapMarkerAlt)`
-  font-size: 2rem;
-  color: #f39c12;
-`;
-
-const LocationName = styled.span`
-  margin-top: 5px;
-  font-size: 1rem;
-  color: #fff;
-`;
-
-const LocationDetails = styled.div`
-  position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: #333;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-  text-align: center;
-  z-index: 10;
+  width: 2px;
+  height: 100%;
+  background-color: #f39c12;
+  transform: translateX(-50%);
 `;
 
-const CloseButton = styled.button`
-  background: #f39c12;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  padding: 5px 10px;
-  cursor: pointer;
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const TimelineItem = styled.div`
+  position: relative;
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom: 40px;
+  animation: ${fadeIn} 0.5s ease-in-out;
+
+  &:nth-child(odd) {
+    left: 0;
+    text-align: right;
+    padding-right: 30px;
+  }
+
+  &:nth-child(even) {
+    left: 50%;
+    padding-left: 30px;
+  }
+`;
+
+const ItemContent = styled.div`
+  background-color: #000000;
+  padding: 20px;
+  border-radius: 8px;
+  color: #f39c12;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #f39c12;
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  &:nth-child(odd):before {
+    right: -20px;
+  }
+
+  &:nth-child(even):before {
+    left: -20px;
+  }
+`;
+
+const ItemTitle = styled.h3`
+  font-size: 1.2rem;
+  color: #f39c12;
+`;
+
+const ItemDetails = styled.p`
   margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ffffff;
+`;
+
+const ItemButton = styled.button`
+  background-color: #e76f51;
+  color: #ffffff;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
   &:hover {
-    background: #e67e22;
+    background-color: #f39c12;
   }
 `;
 
 const locations = [
   {
-    type: 'High School',
-    name: 'PSSEMR SCHOOL',
-    details: 'Davanagere\nCBSE\n2015-2018\nHigh School',
-    top: 20,
-    left: 50,
+    title: 'High School',
+    institution: 'PSSEMR SCHOOL',
+    details: 'Davanagere, CBSE, 2015-2018',
+    description: 'Completed my high school education with a focus on science and math subjects.',
   },
   {
-    type: 'PUC',
-    name: 'The Vision PU College',
-    details: 'Bengaluru\nKSEEB\n2018-2020\nPUC',
-    top: 50,
-    left: 20,
+    title: 'PUC',
+    institution: 'The Vision PU College',
+    details: 'Bengaluru, KSEEB, 2018-2020',
+    description: 'Studied Physics, Chemistry, and Math in PUC, building a strong foundation for engineering studies.',
   },
   {
-    type: 'UG Degree',
-    name: 'Reva University',
-    details: 'Bengaluru\nB.Tech\n2020-2024\nCSE',
-    top: 50,
-    left: 80,
+    title: 'Undergraduate Degree',
+    institution: 'Reva University',
+    details: 'Bengaluru, B.Tech in CSE, 2020-2024',
+    description: 'Pursuing a degree in Computer Science Engineering with a focus on software development and AI.',
   },
 ];
 
 const Education = () => {
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleItemClick = (index) => {
+    setSelectedItem(selectedItem === index ? null : index);
+  };
 
   return (
     <EducationContainer id="education">
-      <EducationTitle>Education Journey</EducationTitle>
-      <Disclaimer>Click on any icon to know more</Disclaimer>
-      <MapContainer>
-        <TriangleContainer>
-          {locations.map((location, index) => (
-            <Location
-              key={index}
-              style={{ top: `${location.top}%`, left: `${location.left}%` }}
-              onClick={() => setSelectedLocation(location)}
-            >
-              <LocationIcon />
-              <LocationName>{location.type}</LocationName>
-            </Location>
-          ))}
-          {selectedLocation && (
-            <LocationDetails>
-              <strong>{selectedLocation.name}</strong>
-              <br />
-              {selectedLocation.details.split('\n').map((line, index) => (
-                <span key={index}>{line}<br /></span>
-              ))}
-              <CloseButton onClick={() => setSelectedLocation(null)}>Close</CloseButton>
-            </LocationDetails>
-          )}
-        </TriangleContainer>
-      </MapContainer>
+      <EducationTitle>Education Timeline</EducationTitle>
+      <TimelineContainer>
+        <TimelineLine />
+        {locations.map((location, index) => (
+          <TimelineItem key={index}>
+            <ItemContent>
+              <ItemTitle>{location.title}</ItemTitle>
+              <p><strong>{location.institution}</strong></p>
+              <ItemDetails>{location.details}</ItemDetails>
+              {selectedItem === index ? (
+                <ItemDetails>{location.description}</ItemDetails>
+              ) : (
+                <ItemButton onClick={() => handleItemClick(index)}>
+                  {selectedItem === index ? 'Hide Details' : 'View Details'}
+                </ItemButton>
+              )}
+            </ItemContent>
+          </TimelineItem>
+        ))}
+      </TimelineContainer>
     </EducationContainer>
   );
 };

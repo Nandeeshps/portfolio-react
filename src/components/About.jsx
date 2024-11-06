@@ -1,5 +1,8 @@
-// import React from 'react';
-// import styled from 'styled-components';
+
+
+
+// import React, { useEffect, useRef, useState } from 'react';
+// import styled, { keyframes } from 'styled-components';
 
 // const ProfileContainer = styled.section`
 //   padding: 50px 20px;
@@ -10,6 +13,17 @@
 //   align-items: center;
 // `;
 
+// const slideIn = keyframes`
+//   from {
+//     opacity: 0;
+//     transform: translateY(50px);
+//   }
+//   to {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// `;
+
 // const ProfileCard = styled.div`
 //   background: #0d0d0d;
 //   padding: 30px;
@@ -18,6 +32,13 @@
 //   display: flex;
 //   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 //   border: 2px solid #f39c12;
+//   opacity: 0;
+//   transform: translateY(50px);
+//   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+//   &.visible {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
 // `;
 
 // const LeftSide = styled.div`
@@ -70,9 +91,36 @@
 // `;
 
 // const About = () => {
+//   const [isVisible, setIsVisible] = useState(false);
+//   const profileRef = useRef(null);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) {
+//           setIsVisible(true);
+//           observer.disconnect();
+//         }
+//       },
+//       {
+//         threshold: 0.1,
+//       }
+//     );
+
+//     if (profileRef.current) {
+//       observer.observe(profileRef.current);
+//     }
+
+//     return () => {
+//       if (observer && observer.disconnect) {
+//         observer.disconnect();
+//       }
+//     };
+//   }, []);
+
 //   return (
 //     <ProfileContainer id="about">
-//       <ProfileCard>
+//       <ProfileCard ref={profileRef} className={isVisible ? 'visible' : ''}>
 //         <LeftSide>
 //           <ProfileImage src="/path-to-your-profile-image.jpg" alt="Profile" />
 //         </LeftSide>
@@ -107,6 +155,8 @@
 
 
 
+
+
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
@@ -119,14 +169,14 @@ const ProfileContainer = styled.section`
   align-items: center;
 `;
 
-const slideIn = keyframes`
+const fadeInScale = keyframes`
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 `;
 
@@ -136,14 +186,13 @@ const ProfileCard = styled.div`
   border-radius: 10px;
   max-width: 800px;
   display: flex;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   border: 2px solid #f39c12;
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transform: scale(0.9);
+  transition: all 0.5s ease-out;
   &.visible {
-    opacity: 1;
-    transform: translateY(0);
+    animation: ${fadeInScale} 0.5s ease forwards;
   }
 `;
 
@@ -151,7 +200,6 @@ const LeftSide = styled.div`
   flex: 1;
   text-align: center;
   padding: 20px;
-  border-right: 2px solid #f39c12;
 `;
 
 const RightSide = styled.div`
@@ -165,6 +213,10 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   margin-bottom: 20px;
   border: 3px solid #f39c12;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const ProfileName = styled.h2`
@@ -180,6 +232,7 @@ const ProfileRole = styled.h3`
 
 const ProfileDescription = styled.p`
   font-size: 1rem;
+  margin-top: 15px;
 `;
 
 const InfoRow = styled.div`
@@ -196,6 +249,21 @@ const InfoValue = styled.span`
   color: #f39c12;
 `;
 
+const ResumeButton = styled.button`
+  background: #f39c12;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  &:hover {
+    background: #d68910;
+  }
+`;
+
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const profileRef = useRef(null);
@@ -208,20 +276,12 @@ const About = () => {
           observer.disconnect();
         }
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
 
-    if (profileRef.current) {
-      observer.observe(profileRef.current);
-    }
+    if (profileRef.current) observer.observe(profileRef.current);
 
-    return () => {
-      if (observer && observer.disconnect) {
-        observer.disconnect();
-      }
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -231,10 +291,8 @@ const About = () => {
           <ProfileImage src="/path-to-your-profile-image.jpg" alt="Profile" />
         </LeftSide>
         <RightSide>
-          <InfoRow>
-            <InfoLabel>My Name:</InfoLabel>
-            <InfoValue>Nandeesh P S</InfoValue>
-          </InfoRow>
+          <ProfileName>Nandeesh P S</ProfileName>
+          <ProfileRole>Associate System Engineer</ProfileRole>
           <InfoRow>
             <InfoLabel>Date of Birth:</InfoLabel>
             <InfoValue>26/06/2002</InfoValue>
@@ -248,8 +306,11 @@ const About = () => {
             <InfoValue>In the footer section</InfoValue>
           </InfoRow>
           <ProfileDescription>
-            I am a passionate gamer and developer. I love creating immersive gaming experiences and working on exciting projects. My journey in the gaming world has been thrilling, and I continuously strive to push the boundaries of what's possible in game development.
+            I am an Associate System Engineer with a strong passion for technology and problem-solving. My role involves ensuring system reliability, optimizing performance, and working with teams to develop efficient solutions. I’m committed to continuous learning and eager to contribute to impactful projects.
           </ProfileDescription>
+          <ResumeButton onClick={() => window.open('/path-to-your-resume.pdf', '_blank')}>
+            Download Resume
+          </ResumeButton>
         </RightSide>
       </ProfileCard>
     </ProfileContainer>
